@@ -5,13 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>나라이름으로 수도 검색하기</title>
+  <style>
+    *{margin:0; padding:0; box-sizing:border-box;}
+    body{background:mediumseagreen; position:relative;}
+    .container{width:30%; height:300px; background:white; margin:0 auto; position:relative; top:100px; box-shadow:1px 1px 15px gray;}
+    h2{padding:20px; text-align:center;}
+    form input:first-child{width:100%; padding:10px 15px; font-size:20px;}
+    button{width:100%; border:none; padding:10px 15px; font-size:20px;}
+    .result{padding:20px; font-size:16px;}
+  </style>
 </head>
 <body>
-  <form action="">
-    <input type="text" name="country" placeholder="나라이름으로 수도를 검색합니다">
-    <input type="submit" value="검색!">
-  </form>
+  <div class="container">
+    <h2>나라이름으로 수도 검색하기</h2>
+    <form action="/process/post" method="post">
+      <input type="text" name="country" placeholder="Enter Country..">
+      <!-- input submit은 새로고침하여 보내는 특징이있어서 ajax와는 거리가멀다.
+      <input type="submit" value="검색!" class="ajaxsearch">
+      -->
+    </form>
+    <button class="ajaxsearch">검색!</button>
+    <div class="result"></div>
+  </div>
 
-  <div class="result"></div>
+  <script>
+    document.querySelector('.ajaxsearch').addEventListener('click',function(){
+      var data = document.forms[0].elements[0].value;
+      searchAjax("http://localhost:3000/search",data);
+    });
+
+    function searchAjax(url,data){
+      var data = { "country":data };
+      data = JSON.stringify(data);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST',url);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(data);
+
+      xhr.addEventListener('load',function(){
+        var res = JSON.parse(xhr.responseText);
+        console.log(res);
+        document.querySelector('.result').innerHTML = res.capital;
+      });
+
+    }
+  </script>
 </body>
 </html>
