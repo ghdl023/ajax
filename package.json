@@ -1,0 +1,22 @@
+{
+  "name": "practice_ajax",
+  "version": "1.0.0",
+  "description": "Node.js에서 ajax를 이용한 데이터 통신 연습예제",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwee1216/practice_Ajax.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gwee1216/practice_Ajax/issues"
+  },
+  "homepage": "https://github.com/gwee1216/practice_Ajax#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
